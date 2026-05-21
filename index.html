@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CargoConnectAI | Cement Aggregation & Truck Matching</title>
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+    body { background: #f4f7fb; color: #172033; }
+    header { background: #0f172a; color: white; padding: 22px; text-align: center; }
+    .logo { width: 90px; height: auto; margin-bottom: 10px; }
+    .badge { display: inline-block; background: #facc15; color: #111827; padding: 7px 12px; border-radius: 20px; margin-top: 10px; font-weight: bold; }
+    nav { margin-top: 15px; }
+    nav a { color: white; margin: 0 8px; text-decoration: none; font-weight: bold; }
+    .hero { padding: 35px 20px; text-align: center; background: linear-gradient(135deg, #0f172a, #1e40af); color: white; }
+    .hero h1 { font-size: 30px; margin-bottom: 15px; }
+    .hero p { max-width: 850px; margin: auto; font-size: 17px; line-height: 1.6; }
+    .container { max-width: 1100px; margin: 25px auto; padding: 0 15px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+    .card { background: white; padding: 22px; border-radius: 14px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+    h2 { color: #0f172a; margin-bottom: 15px; }
+    h3 { color: #1e40af; margin-bottom: 10px; }
+    input, select, button { width: 100%; padding: 12px; margin: 8px 0; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 15px; }
+    button { background: #1e40af; color: white; border: none; font-weight: bold; cursor: pointer; }
+    button:hover { background: #172554; }
+    .stats { text-align: center; font-weight: bold; font-size: 20px; color: #1e40af; }
+    .list { background: #f8fafc; padding: 12px; border-radius: 8px; margin-top: 10px; font-size: 14px; }
+    .success { background: #dcfce7; color: #166534; padding: 12px; border-radius: 8px; margin-top: 10px; display: none; }
+    footer { text-align: center; padding: 25px; background: #0f172a; color: white; margin-top: 30px; font-size: 14px; }
+    .small { font-size: 13px; color: #64748b; line-height: 1.5; }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <img src="sureway-logo.png" alt="Sureway Logo" class="logo">
+  <h1>CargoConnectAI</h1>
+  <p>AI-Powered Cement Aggregation & Truck Matching Platform</p>
+  <div class="badge">Powered by Sureway Integrated Technology Solutions Limited RC: 8481374</div>
+  <nav>
+    <a href="#request">Request Cement</a>
+    <a href="#truck">Register Truck</a>
+    <a href="#dashboard">Dashboard</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Smart Cement Demand Clustering & Logistics Matching</h1>
+  <p>
+    CargoConnectAI helps SMEs, builders, contractors and individuals aggregate cement demand by location,
+    then matches available trucks to move cement directly from manufacturers and distributors to end users,
+    reducing middlemen cost and improving logistics efficiency.
+  </p>
+</section>
+
+<div class="container">
+
+  <div class="card">
+    <h2>Founder & Innovation Credibility</h2>
+    <p>
+      <strong>Abdulazeez Akanbi Yusuf</strong><br>
+      Founder / Project Lead, CargoConnectAI & Pay4Pump<br>
+      Sureway Integrated Technology Solutions Limited<br>
+      Email: sureways739@gmail.com
+    </p>
+    <p class="small">
+      AI learning participant through MIT Open Learning / 3MTT Universal AI programme.
+      This statement reflects personal learning participation and does not imply MIT endorsement.
+    </p>
+  </div>
+
+  <br>
+
+  <div class="grid">
+    <div class="card stats">Reduce<br><small>middlemen price inflation</small></div>
+    <div class="card stats">Cluster<br><small>buyers by location</small></div>
+    <div class="card stats">Match<br><small>empty trucks to bulk orders</small></div>
+    <div class="card stats">Empower<br><small>SMEs and builders</small></div>
+  </div>
+
+  <br>
+
+  <div class="grid">
+
+    <div class="card" id="request">
+      <h2>Buyer / Builder Cement Request</h2>
+      <p class="small">Submit your cement demand. The system groups nearby buyers into bulk clusters.</p>
+
+      <input id="buyerName" placeholder="Full Name">
+      <select id="buyerType">
+        <option value="">Select Buyer Type</option>
+        <option>SME Retailer</option>
+        <option>Builder</option>
+        <option>Contractor</option>
+        <option>Individual</option>
+      </select>
+
+      <select id="cementBrand">
+        <option value="">Select Cement Brand</option>
+        <option>BUA Cement</option>
+        <option>Dangote Cement</option>
+        <option>Lafarge Cement</option>
+        <option>Mangal Cement</option>
+      </select>
+
+      <input id="buyerLocation" placeholder="Location e.g. Abuja, Minna, Ilorin">
+      <input id="cementBags" type="number" placeholder="Number of Cement Bags">
+
+      <button onclick="submitRequest()">Submit Cement Request</button>
+      <div id="requestMsg" class="success">Cement request submitted successfully.</div>
+    </div>
+
+    <div class="card" id="truck">
+      <h2>Truck Owner Registration</h2>
+      <p class="small">Register available trucks for matching with grouped cement orders.</p>
+
+      <input id="truckName" placeholder="Driver / Company Name">
+      <input id="truckPlate" placeholder="Truck Plate Number">
+      <select id="truckCapacity">
+        <option value="">Truck Capacity</option>
+        <option>300 Bags</option>
+        <option>600 Bags</option>
+        <option>900 Bags</option>
+        <option>1200 Bags</option>
+      </select>
+      <input id="truckLocation" placeholder="Current Truck Location">
+      <input id="truckDestination" placeholder="Destination Preference">
+
+      <button onclick="registerTruck()">Register Truck</button>
+      <div id="truckMsg" class="success">Truck registered successfully.</div>
+    </div>
+
+  </div>
+
+  <br>
+
+  <div class="card" id="dashboard">
+    <h2>Admin Dashboard</h2>
+    <button onclick="runMatching()">Run AI Matching Simulation</button>
+
+    <h3>Cement Demand Requests</h3>
+    <div id="requestsList" class="list">No cement request yet.</div>
+
+    <h3>Available Trucks</h3>
+    <div id="trucksList" class="list">No truck registered yet.</div>
+
+    <h3>AI Cluster & Truck Match Result</h3>
+    <div id="matchResult" class="list">
+      Submit cement requests and trucks, then click “Run AI Matching Simulation”.
+    </div>
+  </div>
+
+  <br>
+
+  <div class="card">
+    <h2>Recommended Next Development Steps</h2>
+    <p>Step 1: Connect forms to MongoDB using Node.js and Express.</p>
+    <p>Step 2: Add buyer, truck owner and admin login.</p>
+    <p>Step 3: Add map API for geolocation and route visibility.</p>
+    <p>Step 4: Add Python AI clustering and truck optimization engine.</p>
+    <p>Step 5: Integrate Pay4Pump for truck fueling and token incentives.</p>
+  </div>
+
+</div>
+
+<footer>
+  © 2026 CargoConnectAI MVP — Sureway Integrated Technology Solutions Limited RC: 8481374<br>
+  Founder: Abdulazeez Akanbi Yusuf | Email: sureways739@gmail.com
+</footer>
+
+<script>
+  const requests = [];
+  const trucks = [];
+
+  function submitRequest() {
+    const request = {
+      name: document.getElementById("buyerName").value,
+      type: document.getElementById("buyerType").value,
+      brand: document.getElementById("cementBrand").value,
+      location: document.getElementById("buyerLocation").value,
+      bags: Number(document.getElementById("cementBags").value)
+    };
+
+    if (!request.name || !request.type || !request.brand || !request.location || !request.bags) {
+      alert("Please fill all cement request fields.");
+      return;
+    }
+
+    requests.push(request);
+    document.getElementById("requestMsg").style.display = "block";
+    updateDashboard();
+  }
+
+  function registerTruck() {
+    const truck = {
+      name: document.getElementById("truckName").value,
+      plate: document.getElementById("truckPlate").value,
+      capacity: document.getElementById("truckCapacity").value,
+      location: document.getElementById("truckLocation").value,
+      destination: document.getElementById("truckDestination").value
+    };
+
+    if (!truck.name || !truck.plate || !truck.capacity || !truck.location || !truck.destination) {
+      alert("Please fill all truck registration fields.");
+      return;
+    }
+
+    trucks.push(truck);
+    document.getElementById("truckMsg").style.display = "block";
+    updateDashboard();
+  }
+
+  function updateDashboard() {
+    const requestsList = document.getElementById("requestsList");
+    const trucksList = document.getElementById("trucksList");
+
+    requestsList.innerHTML = requests.length
+      ? requests.map((r, i) =>
+        `<p><strong>${i + 1}. ${r.name}</strong> requested ${r.bags} bags of ${r.brand} in ${r.location} (${r.type})</p>`
+      ).join("")
+      : "No cement request yet.";
+
+    trucksList.innerHTML = trucks.length
+      ? trucks.map((t, i) =>
+        `<p><strong>${i + 1}. ${t.name}</strong> — ${t.plate}, Capacity: ${t.capacity}, Location: ${t.location}, Destination: ${t.destination}</p>`
+      ).join("")
+      : "No truck registered yet.";
+  }
+
+  function runMatching() {
+    const result = document.getElementById("matchResult");
+
+    if (requests.length === 0 || trucks.length === 0) {
+      result.innerHTML = "Please submit at least one cement request and register at least one truck.";
+      return;
+    }
+
+    let totalBags = requests.reduce((sum, r) => sum + r.bags, 0);
+    let locations = [...new Set(requests.map(r => r.location))].join(", ");
+    let brands = [...new Set(requests.map(r => r.brand))].join(", ");
+    let selectedTruck = trucks[0];
+
+    result.innerHTML = `
+      <p><strong>AI Simulation Result:</strong></p>
+      <p>${requests.length} buyer(s) clustered around: <strong>${locations}</strong>.</p>
+      <p>Total cement demand: <strong>${totalBags} bags</strong>.</p>
+      <p>Preferred cement brand(s): <strong>${brands}</strong>.</p>
+      <p>Recommended truck: <strong>${selectedTruck.name}</strong> (${selectedTruck.plate}) from ${selectedTruck.location}.</p>
+      <p><strong>Business Value:</strong> Bulk demand can support direct negotiation with manufacturers/distributors and reduce logistics cost.</p>
+    `;
+  }
+</script>
+
+</body>
+</html>
